@@ -49,7 +49,12 @@ export default function RegisterPage() {
                     }}
                 >
                     <button
-                        onClick={() => signIn("google")}
+                        onClick={() =>
+                            signIn("google", {
+                                redirect: false,
+                                callbackUrl: "/dashboard",
+                            })
+                        }
                         className="google--btn"
                     >
                         <Image
