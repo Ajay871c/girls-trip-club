@@ -1,0 +1,64 @@
+.plan--title {
+    color: rgb(206, 87, 107);
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+}
+
+.subscription--cards {
+    margin-top: 30px;
+
+    .subscription--card {
+        padding: 30px 20px;
+        text-align: center;
+        border-radius: 16px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background: linear-gradient(to bottom right, #1f1f1f, #131313);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+
+        h2 {
+            font-size: 24px;
+            color: #fff;
+        }
+
+        .plan--price {
+            font-size: 20px;
+            color: rgb(206, 87, 107);
+            margin: 10px 0 20px;
+        }
+
+        .plan--features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 20px;
+            color: #ccc;
+
+            li {
+                margin-bottom: 8px;
+                font-size: 14px;
+            }
+        }
+
+        &:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+        }
+
+        &.highlight {
+            border: 2px solid rgb(206, 87, 107);
+            background: linear-gradient(to bottom right, #28202c, #1a1a1a);
+        }
+
+        .btn {
+            background: rgb(206, 87, 107);
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            color: #fff !important;
+
+            &:hover {
+                color: #fff !important;
+                background: rgb(201, 72, 94);
+            }
+        }
+    }
+}
