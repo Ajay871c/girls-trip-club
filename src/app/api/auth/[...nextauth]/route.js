@@ -9,67 +9,74 @@ let usersCollection;
 
 // Helper: Get MongoDB users collection
 async function getUserCollection() {
-  const client = await clientPromise;
-  const db = client.db(); // use default DB
-  return db.collection("users");
+    const client = await clientPromise;
+    const db = client.db(); // use default DB
+    return db.collection("users");
 }
 
 const handler = NextAuth({
-  adapter: MongoDBAdapter(clientPromise),
-  providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    }),
+    adapter: MongoDBAdapter(clientPromise),
+    providers: [
+        GoogleProvider({
+            clientId: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        }),
 
-    CredentialsProvider({
-      name: "Credentials",
-      credentials: {
-        email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" },
-      },
-      async authorize(credentials) {
-        usersCollection = await getUserCollection();
-        const user = await usersCollection.findOne({ email: credentials.email });
+        CredentialsProvider({
+            name: "Credentials",
+            credentials: {
+                email: { label: "Email", type: "email" },
+                password: { label: "Password", type: "password" },
+            },
+            
+            async authorize(credentials) {
+                usersCollection = await getUserCollection();
+                const user = await usersCollection.findOne({
+                    email: credentials.email,
+                });
 
-        if (!user || !user.password) {
-          throw new Error("No user found");
-        }
+                if (!user || !user.password) {
+                    throw new Error("No user found");
+                }
 
-        const isValid = await bcrypt.compare(credentials.password, user.password);
-        if (!isValid) {
-          throw new Error("Invalid password");
-        }
+                const isValid = await bcrypt.compare(
+                    credentials.password,
+                    user.password
+                );
 
-        return {
-          id: user._id.toString(),
-          email: user.email,
-          name: user.name,
-        };
-      },
-    }),
-  ],
+                if (!isValid) {
+                    throw new Error("Invalid password");
+                }
 
-  session: {
-    strategy: "jwt",
-  },
+                return {
+                    id: user._id.toString(),
+                    email: user.email,
+                    name: user.name,
+                };
+            },
+        }),
+    ],
 
-  callbacks: {
-    async jwt({ token, user }) {
-      if (user) token.id = user.id;
-      return token;
+    session: {
+        strategy: "jwt",
     },
-    async session({ session, token }) {
-      if (token?.id) session.user.id = token.id;
-      return session;
+
+    callbacks: {
+        async jwt({ token, user }) {
+            if (user) token.id = user.id;
+            return token;
+        },
+        async session({ session, token }) {
+            if (token?.id) session.user.id = token.id;
+            return session;
+        },
     },
-  },
 
-  pages: {
-    signIn: "/login",
-  },
+    pages: {
+        signIn: "/login",
+    },
 
-  secret: process.env.NEXTAUTH_SECRET,
+    secret: process.env.NEXTAUTH_SECRET,
 });
 
 export { handler as GET, handler as POST };

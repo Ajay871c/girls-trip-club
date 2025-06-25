@@ -44,7 +44,7 @@ export default function LoginPage() {
                     }}
                 >
                     <button
-                        onClick={() => signIn("google")}
+                        onClick={() => signIn("google",{ callbackUrl: "/dashboard" })}
                         className="google--btn"
                     >
                         <Image src="/google-icon.svg" width={25} height={25} alt="Google btn" />
