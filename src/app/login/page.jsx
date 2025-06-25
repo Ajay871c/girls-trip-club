@@ -30,6 +30,7 @@ export default function LoginPage() {
         }
     };
 
+
     return (
         <div className="login--page">
             <div className="login--card">
@@ -44,10 +45,20 @@ export default function LoginPage() {
                     }}
                 >
                     <button
-                        onClick={() => signIn("google",{ callbackUrl: "/dashboard" })}
+                        onClick={() =>
+                            signIn("google", {
+                                redirect: false,
+                                callbackUrl: "/dashboard",
+                            })
+                        }
                         className="google--btn"
                     >
-                        <Image src="/google-icon.svg" width={25} height={25} alt="Google btn" />
+                        <Image
+                            src="/google-icon.svg"
+                            width={25}
+                            height={25}
+                            alt="Google btn"
+                        />
                         Sign in with Google
                     </button>
 
@@ -77,7 +88,9 @@ export default function LoginPage() {
                     <div className="separator">or</div>
 
                     <div className="login--footer">
-                        <p>Dont have an account? <a href="/signup">Signup</a></p>
+                        <p>
+                            Dont have an account? <a href="/signup">Signup</a>
+                        </p>
                     </div>
                 </form>
             </div>
