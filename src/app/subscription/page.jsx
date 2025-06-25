@@ -71,6 +71,8 @@ const SubscriptionPage = () => {
     } else {
       alert("Failed to redirect to Stripe. Try again.");
     }
+
+    console.log(data);
   };
 
   return (
