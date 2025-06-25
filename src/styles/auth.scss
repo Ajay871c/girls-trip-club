@@ -1,3 +1,6 @@
+$pink-color: #bc2c97;
+$pink-color-2: #c91d9e;
+
 .login--page {
     display: flex;
     align-items: center;
@@ -23,7 +26,7 @@
 
         h2 {
             font-size: 1.8rem;
-            color: rgb(206, 87, 107);
+            color: $pink-color;
         }
 
         p {
@@ -48,7 +51,7 @@
 
                 &:focus {
                     outline: none;
-                    border-color: rgb(206, 87, 107);
+                    border-color: $pink-color;
                 }
             }
 
@@ -67,7 +70,7 @@
                     right: 10px;
                     background: none;
                     border: none;
-                    color: rgb(206, 87, 107);
+                    color: $pink-color;
                     font-weight: bold;
                     cursor: pointer;
                     font-size: 0.9rem;
@@ -80,7 +83,7 @@
             }
 
             button {
-                background: rgb(206, 87, 107);
+                background: $pink-color;
                 border: none;
                 border-radius: 8px;
                 padding: 0.75rem;
@@ -90,7 +93,7 @@
                 transition: background 0.3s;
 
                 &:hover {
-                    background: rgb(201, 72, 94);
+                    background: $pink-color-2;
                 }
             }
         }
@@ -101,7 +104,7 @@
                 color: #888;
 
                 a {
-                    color: rgb(206, 87, 107);
+                    color: $pink-color;
                     text-decoration: none;
 
                     &:hover {
